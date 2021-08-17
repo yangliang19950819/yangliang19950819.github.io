@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>WebSocket</title>
+</head>
+<body>
+    <button>send message</button>
+    <my-counter count="10"></my-counter>
+    <script>
+        // const ws = new WebSocket('ws://localhost:10086');
+        // ws.onopen = function(){
+        //     console.log('连接建立')
+        // }
+        // ws.onmessage = function(e){
+        //     console.log('服务端数据',e.data)
+        // }
+        // ws.onclose = function(){
+        //     console.log('通道关闭')
+        // }
+        // document.querySelector('button').onclick = function(){
+        //     ws.send('xxx')
+        // }
+
+        navigator.serviceWorker.register('/webs.js').then((reg)=>{
+            // console.log(reg,'🧬')
+        }).catch((err) => {
+            console.error(err)
+        })
+
+        navigator.serviceWorker?.ready
+        .then(() => {
+            navigator.serviceWorker.controller?.postMessage({
+                msg: 'client service worker'
+            })
+        })
+    
+        if ("serviceWorker" in navigator && navigator.serviceWorker) {
+            navigator.serviceWorker.addEventListener("message", function(event) {
+                // console.log(event,'🇫🇯');
+            })
+        }
+        </script>
+        <script src="/webC.js"></script>
+</body>
+</html>
